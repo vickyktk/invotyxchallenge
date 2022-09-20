@@ -1,8 +1,5 @@
 let mongoose=require('mongoose')
-require('dotenv').config();
 
-let url=process.env.mongoAtlas
-// let url=process.env.mongoLocal
 
 const stationsSchema = mongoose.Schema( {
     stationId:{
