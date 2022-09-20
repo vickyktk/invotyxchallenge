@@ -1,0 +1,21 @@
+{
+  "name": "backend_challenge",
+  "version": "1.0.0",
+  "description": "An invotyx challenge",
+  "main": "index.js",
+  "engines": {
+    "node": "16.13.1"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Waqas Rahman",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "mongoose": "^6.6.1",
+    "node-cron": "^3.0.2"
+  }
+}
