@@ -1,4 +1,6 @@
 const axios = require('axios')
+require('dotenv').config();
+
 const API_KEY = process.env.OPEN_WEATHER_API_KEY
 const stations = require('../model/schema')
 const cron = require('node-cron')
