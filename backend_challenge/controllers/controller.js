@@ -8,36 +8,35 @@ const express = require('express')
 const app = express()
 
 cron.schedule('0 0 */1 * * *', async function() {
-    let config = {
-        method: 'get',
-        url: 'https://kiosks.bicycletransit.workers.dev/phl'
-    }
-    let response = await axios(config)
-    const features = response.data.features
-    let featuresArr = []
-    features.forEach((feature)=>{
-        const properties = feature.properties
-        const stationId = properties.id
-        featuresArr.push({stationId, properties:JSON.stringify(properties)})
-    })
-    let result = await stations.insertMany(featuresArr)
+    getAndUpdate()
 })
 
 const fetchIndigoData = async (req,res)=>{
-    let config = {
-        method: 'get',
-        url: 'https://kiosks.bicycletransit.workers.dev/phl'
-    }
-    let response = await axios(config)
-    const features = response.data.features
-    let featuresArr = []
-    features.forEach((feature)=>{
-        const properties = feature.properties
-        const stationId = properties.id
-        featuresArr.push({stationId, properties:JSON.stringify(properties)})
-    })
-    let result = await stations.insertMany(featuresArr)
+    getAndUpdate();
     res.status(200).json({"message":"Data Updated Successfully"})
+}
+
+const getAndUpdate= async()=>{
+    try {
+        let config = {
+            method: 'get',
+            url: 'https://kiosks.bicycletransit.workers.dev/phl'
+        }
+        let response = await axios(config)
+        const features = response.data.features
+        let featuresArr = []
+        features.forEach((feature)=>{
+            const properties = feature.properties
+            const stationId = properties.id
+            featuresArr.push({stationId, properties:JSON.stringify(properties)})
+        })
+        let result = await stations.insertMany(featuresArr)
+        return result
+    } catch (error) {
+        console.log(err)
+        process.exit(1)
+    }
+    
 }
 
 
