@@ -43,7 +43,10 @@ const getAndUpdate= async()=>{
 const getAllStationsData = async(req,res)=>{
     
     let allStations = await stations.find({})
-    console.log("stations: ",allStations)
+    if(null == allStations) {
+        res.status(404).json({"error":"Could find data"})
+        return
+    }
     const config = {
         method: 'get',
         url:`https://api.openweathermap.org/data/2.5/weather?q=Philadelphia&appid=${API_KEY}`
@@ -60,6 +63,10 @@ const getAllStationsData = async(req,res)=>{
 const getSingleStationData = async(req,res)=>{
     const stationId = req.params.id
     let stationData = await stations.findOne({stationId:stationId})
+    if(null == stationData) {
+        res.status(404).json({"error":"Could find data against provided station ID"})
+        return
+    }
     const properties = JSON.parse(stationData.properties)
     const addressZipCode = properties.addressZipCode
     const config = {
