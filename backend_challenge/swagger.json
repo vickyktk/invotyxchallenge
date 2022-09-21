@@ -9,7 +9,7 @@
         "url": "https://opensource.org/licenses/MIT"
       }
     },
-    "host": "localhost:3000/api/v1",
+    "host": "https://invotyxchallenge.herokuapp.com/api/v1/",
     "basePath": "/",
     "tags": [
       {
